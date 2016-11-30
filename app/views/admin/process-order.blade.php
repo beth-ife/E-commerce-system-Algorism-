@@ -21,12 +21,12 @@ Order
                     <div class="box-body">
                         <table class="table table-bordered table-striped">
                             <tr><th>Order Id:</th><td>{{$order->order_id}}
-                                    <input type="" value="{{$order->id}}" id="o_id"/>
+                                    <input type="hidden" value="{{$order->id}}" id="o_id"/>
                                 </td></tr>
                             <tr>
                                 <th>Shipment Status</th>
                                 <td>
-                                    @if($order->isShipped =='1')
+                                    @if($order->isShipped ==1)
                                     Shipped
                                     @else
                                     Unshipped
@@ -63,11 +63,11 @@ Order
                         </table>
                     </div>
                     <!-- /.box-body -->
-                    @if($order->isShipped == '0')
+                   
                     <div class="box-footer">
                         <button type="submit" id="shipOrder" class="btn btn-primary">Set as Shipped</button>
                     </div>
-                    @endif
+                   
                 </form>
             </div>
             <!-- /.box -->
