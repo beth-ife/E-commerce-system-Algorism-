@@ -30,7 +30,7 @@
         <script src="{{ asset('js/bootstrap.min.js')}}"></script>
         <script src="{{ asset('js/simpleCart.min.js')}}"></script>
         <script src="{{ asset('js/myCart.js')}}"></script>
-        
+
         <script src="{{ asset('js/responsiveslides.min.js')}}"></script>
         <!-- slide -->
         <script src="js/responsiveslides.min.js"></script>
@@ -72,12 +72,16 @@ new WOW().init();
 
                         </div>
                     </div>
+                    @if(!empty ($store))
                     <div class="col-sm-2 number animated wow fadeInRight" data-wow-delay=".5s">
-                        <span><i class="glyphicon glyphicon-phone"></i>085 596 234</span>
+                        <span><i class="glyphicon glyphicon-phone"></i>{{$store->phone}}</span>
 
                     </div>
+                    @endif
                     <div class="col-sm-2 search animated wow fadeInRight" data-wow-delay=".5s">		
-                        <a class="play-icon popup-with-zoom-anim" href="#small-dialog"><i class="glyphicon glyphicon-search"> </i> </a>
+                        <a class="play-icon popup-with-zoom-anim" href="#small-dialog">
+                            <i class="glyphicon glyphicon-search"> </i> 
+                        </a>
                     </div>
                     <div class="clearfix"> </div>
                 </div>
@@ -105,7 +109,12 @@ new WOW().init();
                                     <li><a href="/">Home</a></li>
 
                                     <li><a href="#">Products</a></li>
-                                    <li><a href="#">Sign In</a></li>
+                                    
+                                    @if(Session::has('user'))
+                                    <li><a id="sign-out" href="#">Sign Out</a></li>
+                                    @else
+                                    <li><a href="/login">Sign In</a></li>
+                                    @endif
                                     <li class="last"><a href="#">Contact</a></li>
                                 </ul>
                             </div><!-- /.navbar-collapse -->
@@ -168,10 +177,12 @@ new WOW().init();
                         <h3>Follow Us On</h3>
                         <div class="social-icons">
                             <ul class="social">
+                                @if(!empty ($store))
                                 <li><a href="#"><i></i></a> </li>
-                                <li><a href="#"><i class="facebook"></i></a></li>	
+                                <li><a href="http://facebook.com/{{$store->facebook}}"><i class="facebook"></i></a></li>	
                                 <li><a href="#"><i class="google"></i> </a></li>
-                                <li><a href="#"><i class="linked"></i> </a></li>						
+                                <li><a href="#"><i class="linked"></i> </a></li>
+                                @endif
                             </ul>
                             <div class="clearfix"></div>
                         </div>
@@ -182,7 +193,7 @@ new WOW().init();
                             <input type="text" name="email" value="" onfocus="this.value = '';" onblur="if (this.value == '') {
                                         this.value = '';
                                     }">
-                            <input type="submit" value="SUBSCRIBE">
+                            <input class="btn btn-default btn-lg" type="button" value="SUBSCRIBE">
                         </form>
                     </div>
                     <div class="clearfix"> </div>	
@@ -191,52 +202,57 @@ new WOW().init();
             <div class="footer-bottom">
                 <div class="container">
                     <div class="col-md-3 footer-bottom-cate animated wow fadeInLeft" data-wow-delay=".5s">
-                        <h6>Categories</h6>
+                        <h6>Categories 
+                            <input type="hidden" id="session" value="{{Session::get('user')}}" style="display: block">
+                        </h6>
                         <ul>
-                            <li><a href="products.html">Curabitur sapien</a></li>
-                            <li><a href="single.html">Dignissim purus</a></li>
-                            <li><a href="men.html">Tempus pretium</a></li>
-                            <li><a href="products.html">Dignissim neque</a></li>
-                            <li><a href="single.html">Ornared id aliquet</a></li>
+                            @if(!empty ($all_categories))
+                            @foreach($all_categories as $cat)
+                            <li><a href="#">{{$cat->category_name}}</a></li>
+                            @endforeach
+                            @endif
 
                         </ul>
                     </div>
-                    <div class="col-md-3 footer-bottom-cate animated wow fadeInLeft" data-wow-delay=".5s">
-                        <h6>Feature Projects</h6>
-                        <ul>
-                            <li><a href="products.html">Dignissim purus</a></li>
-                            <li><a href="men.html">Curabitur sapien</a></li>
-                            <li><a href="single.html">Tempus pretium</a></li>
-                            <li><a href="men.html">Dignissim neque</a></li>
-                            <li><a href="products.html">Ornared id aliquet</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3 footer-bottom-cate animated wow fadeInRight" data-wow-delay=".5s">
-                        <h6>Top Brands</h6>
-                        <ul>
-                            <li><a href="products.html">Tempus pretium</a></li>
-                            <li><a href="single.html">Curabitur sapien</a></li>
-                            <li><a href="men.html">Dignissim purus</a></li>
-                            <li><a href="single.html">Dignissim neque</a></li>
-                            <li><a href="men.html">Ornared id aliquet</a></li>
 
 
-                        </ul>
-                    </div>
                     <div class="col-md-3 footer-bottom-cate cate-bottom animated wow fadeInRight" data-wow-delay=".5s">
                         <h6>Our Address</h6>
                         <ul>
-                            <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Address : 12th Avenue, 5th block, <span>Sydney.</span></li>
-                            <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>Email : <a href="mailto:info@example.com">info@example.com</a></li>
-                            <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>Phone : +1234 567 567</li>
+                            @if(!empty($store))
+                            <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>Address : {{$store->address}} <span>Nigeria.</span></li>
+                            <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>Email : <a href="mailto:{{$store->email}}">{{$store->email}}</a></li>
+                            <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>Phone : {{$store->phone}}</li>
+                            @endif
                         </ul>
                     </div>
                     <div class="clearfix"> </div>
-                    <p class="footer-class animated wow fadeInUp animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;"> © 2016 Cherry's World . All Rights Reserved  </p>
+                    <p class="footer-class animated wow fadeInUp animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">Copyright © 2016 @if(!empty($store)) {{$store->name}}@endif . All Rights Reserved  </p>
                 </div>
             </div>
         </div>
         <!--footer-->
-        <!--<script src="{{ asset('js/checkout.js')}}"></script>-->
+        <script>
+            $('#sign-out').click(function () {
+                localStorage.clear();
+                sessionStorage.clear();
+                $.ajax({
+                            type: 'GET',
+                            url : '/logout',
+//                            data:{rating: rating},
+                            success: location.reload(),
+                            error: console.log('error')
+                        });
+            });
+
+            if (sessionStorage.getItem('user')) {
+                localStorage.setItem('user', sessionStorage.getItem('user'));
+            } else if (localStorage.getItem('user')) {
+                sessionStorage.setItem('user', localStorage.getItem('user'));
+            } else {
+                sessionStorage.setItem('user', $('#session').val());
+            }
+            console.log(sessionStorage.getItem('user'));
+        </script>
     </body>
 </html>

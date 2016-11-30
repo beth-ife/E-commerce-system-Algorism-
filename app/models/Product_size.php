@@ -9,7 +9,7 @@
 /**
  * Description of Product_size
  *
- * @author OASIS MANAGEMENT
+ * 
  */
 class Product_size extends Eloquent {
     //put your code here

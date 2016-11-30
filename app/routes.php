@@ -19,6 +19,11 @@ Route::get('/view_cart',function(){
 });
 Route::post('/checkout','OrderController@newOrder');
 Route::get('/checkout','OrderController@newOrder');
+Route::post('/post-rating', 'RatingController@postRating');
+
+Route::get('logout',  function (){
+    Session::flush();
+});
 
 //User Accounts
 Route::get('/login', 'AccountController@login');
@@ -35,5 +40,15 @@ Route::post('/store-info','AdminController@postStoreInfo');
 Route::get('/add-product','AdminController@addProduct');
 Route::post('/add-product','AdminController@postAddProduct');
 Route::get('/view-products','AdminController@products');
-Route::get('/process_{id}','AdminController@processOrder');
-Route::post('/process_{id}','AdminController@postProcessOrder');
+Route::get('/process_order_{id}','AdminController@processOrder');
+Route::post('/process_order_{id}','AdminController@postProcessOrder');
+
+//Change shipment status
+Route::post('/ship',function(){
+    $input = Input::all();
+    $id = $input['order_id'];
+    $order = Order::where('id','=',$id)->first();
+    $order->isShipped = 1;
+    $order->save();
+    return $order;
+});

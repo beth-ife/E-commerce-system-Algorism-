@@ -9,7 +9,7 @@
 /**
  * Description of Order_product
  *
- * @author OASIS MANAGEMENT
+ * 
  */
 class OrderProduct extends Eloquent {
     /**
@@ -18,4 +18,10 @@ class OrderProduct extends Eloquent {
 	 * @var string
 	 */
 	protected $table = 'order_products';
+        public function Order() {
+        return $this->belongsTo('Order','order_id','order_id');
+    }
+    public function products(){
+        return $this->belongsToMany('Product');
+    }
 }

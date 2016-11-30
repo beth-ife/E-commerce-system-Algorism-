@@ -9,8 +9,10 @@
 /**
  * Description of Order
  *
- * @author OASIS MANAGEMENT
+ * 
  */
 class Order extends Eloquent {
-    //put your code here
+    public function order_products() {
+        return $this->hasMany('OrderProduct','order_id','order_id');
+    }
 }

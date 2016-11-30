@@ -1,9 +1,9 @@
 @extends('admin/admin_layout')
 @section('title')
-Add Product
+Store Info
 @stop
 @section('page_name')
-New
+::
 @stop
 @section('content')
 <section class="content">
@@ -13,37 +13,50 @@ New
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">New Product</h3>
+                    <h3 class="box-title">Store Information</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
                 <form role="form">
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Product name</label>
-                            <input  class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                            <label for="store_name">Store name</label>
+                            <input  class="form-control" name="store_name" id="store_name" readonly="" 
+                                    value="{{$store->store_name}}" placeholder="Enter store name">
+                            <input type="hidden" value="{{$store->id}}">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Description</label>
-                            <input  class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-addon">&#8358;</span>
-                            <input type="text" class="form-control">
-                            <span class="input-group-addon">.00</span>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputFile">Product Image</label>
-                            <input type="file" id="exampleInputFile">
-
-                            <!--<p class="help-block">Example block-level help text here.</p>-->
+                            <label for="email">Email</label>
+                            <input  class="form-control" value="{{$store->email}}" id="email" name="phone" placeholder="Enter email">
                         </div>
                        
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input value="{{$store->phone}}"  class="form-control" id="phone" name="phone" placeholder="Enter phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea class="form-control" id="address" name="address" placeholder="Enter address">{{$store->address}}</textarea>
+                        </div>
+                        
+                        <!--Social Links-->
+                        <div class="form-group">
+                            <label for="instagram">Instagram (Optional)</label>
+                            <input  class="form-control" value="{{$store->instagram}}" id="instagram" name="instagram" placeholder="Enter instagram handle">
+                        </div>
+                       <div class="form-group">
+                            <label for="twitter">Twitter (Optional)</label>
+                            <input  class="form-control" value="{{$store->twitter}}" id="twitter" name="twitter" placeholder="Enter twitter handle">
+                        </div>
+                        <div class="form-group">
+                            <label for="facebook">Facebook (Optional)</label>
+                            <input  class="form-control" value="{{$store->facebook}}" id="facebook" name="facebook" placeholder="Enter facebook name">
+                        </div>
                     </div>
                     <!-- /.box-body -->
 
                     <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Add Product</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>

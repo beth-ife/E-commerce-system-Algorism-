@@ -36,6 +36,7 @@ class OrderController extends BaseController {
 
                 if ($product->count() > 0) {
                     $this->product_id = $product->first()->id;
+                    
                 } else {
                     exit();
                 }

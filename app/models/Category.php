@@ -9,7 +9,7 @@
 /**
  * Description of Category
  *
- * @author OASIS MANAGEMENT
+ *
  */
 class Category extends Eloquent{
     //put your code here

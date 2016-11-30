@@ -22,7 +22,7 @@ class AccountController extends BaseController {
         $input = Input::all();
         $email = $input['email'];
         $password = $input['password'];
-
+        //$path = Request::path();
 
 
         $user_email = User::where('email', '=', $email); //Check for username first 
@@ -36,14 +36,16 @@ class AccountController extends BaseController {
                 //Put the user in session
                 foreach ($user_password as $user) {
                     Session::put('user', $user->user_type);
+                    
+                    
                     Session::put('user_id', $user->id);
                     //Get cart from session
                     if (Session::has('cart')) {
                         return Redirect::action('OrderController@newOrder');
                     } else {
-                        echo('kkk');
-                        exit();
-                        return Redirect::to('/view_cart');
+//                        echo Session::get('user_type'); 
+//                        exit();
+                        return Redirect::back();
                     }
                 }
                 

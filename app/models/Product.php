@@ -9,14 +9,20 @@
 /**
  * Description of Product
  *
- * @author OASIS MANAGEMENT
+ * 
  */
-class Product extends Eloquent{
-    public function category(){
-        return $this->belongsTo('Category','category', 'id')->select(array('id','category_name'));
+class Product extends Eloquent {
+
+    public function category() {
+        return $this->belongsTo('Category', 'category', 'id')->select(array('id', 'category_name'));
     }
-    
-    public function product_image(){
-        return $this->hasMany('ProductImage','id')->select(array('id','image'));
+
+    public function product_image() {
+        return $this->hasMany('ProductImage', 'id')->select(array('id', 'image'));
     }
+
+    public function orders() {
+        return $this->hasManyThrough('OrderProduct', 'Order', 'product_id', 'id');
+    }
+
 }

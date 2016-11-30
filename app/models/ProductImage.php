@@ -9,7 +9,7 @@
 /**
  * Description of Product_image
  *
- * @author OASIS MANAGEMENT
+ *
  */
 class ProductImage extends Eloquent {
     public function product(){

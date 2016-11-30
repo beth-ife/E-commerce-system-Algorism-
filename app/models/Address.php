@@ -9,10 +9,11 @@
 /**
  * Description of Address
  *
- * @author OASIS MANAGEMENT
+ * 
  */
 class Address extends Eloquent{
     public $timestamps = false;
+    
     public function user(){
         return $this->hasMany('User');
     }

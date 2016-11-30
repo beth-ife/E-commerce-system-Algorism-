@@ -7,10 +7,10 @@
  */
 
 /**
- * Description of Size
+ * Description of Rating
  *
  * 
  */
-class Size extends Eloquent {
-    //put your code here
+class Rating extends Eloquent {
+    public $timestamps = false;
 }

@@ -104,7 +104,7 @@
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Products</span>
-            <span class="label label-primary pull-right">4</span>
+            <span class="label label-primary pull-right">{{$all_products->count()}}</span>
           </a>
           <ul class="treeview-menu">
             <li><a href="/add-product"><i class="fa fa-circle-o"></i> Add Product</a></li>
@@ -186,5 +186,6 @@
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+@yield('last_scripts')
 </body>
 </html>

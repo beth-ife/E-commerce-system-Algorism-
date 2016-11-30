@@ -15,6 +15,10 @@ Home
         <div class=" simpleCart_grandTotal pull-right"></div>
     </div>
 </div>
-<div class="row simpleCart_checkout pull-right"><a class="btn btn-lg btn-warning" href="javascript:;" >Proceed To Checkout</a></div>
+
+<div class="row simpleCart_checkout pull-right">
+    <a class="btn btn-lg btn-warning" href="javascript:;" >Proceed To Checkout</a>
+</div>
+
 @stop
 
